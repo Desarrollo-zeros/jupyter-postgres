@@ -1,0 +1,51 @@
+version: '3'
+services:
+  # PostgreSQL 13
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: toor
+      POSTGRES_DB: imdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./database:/docker-entrypoint-initdb.d
+    networks:
+      - db_network
+
+  # Jupyter Notebook con integración a PostgreSQL
+  jupyter:
+    image: jupyter/datascience-notebook
+    environment:
+        JUPYTER_ENABLE_LAB: yes
+        JUPYTER_ENABLE_POSTGRES: yes
+        JUPYTER_ENABLE_MYSQL : yes
+        JUPYTER_POSTGRES_USER: root
+        JUPYTER_POSTGRES_PASSWORD: toor
+        JUPYTER_POSTGRES_DB: imdb
+        JUPYTER_MYSQL_USER: zeros
+        JUPYTER_MYSQL_PASSWORD: toor
+        JUPYTER_MYSQL_DB: imdb
+        JUPYTER_TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NDM4MzAxNjksImlzcyI6ImtvcGliaW5hIiwibmJmIjoxNjQzODMwMTY5LCJyZXNvdXJjZSI6IjE1NDQ0ZDAwMDAiLCJhdWQiOiJ3ZWJob29rLWFwaSJ9.HJ2HyBFci6hQSeXyPS3t2G7sm5U2uR9A2vJccD25qQg
+    volumes:
+      - ./class:/home/jovyan/
+    ports:
+      - "8888:8888"
+    networks:
+      - db_network
+
+  # pgAdmin 4
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: adminpassword
+    ports:
+      - "5050:80"
+    networks:
+      - db_network
+
+
+networks:
+  db_network:
