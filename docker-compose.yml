@@ -27,7 +27,7 @@ services:
         JUPYTER_MYSQL_USER: zeros
         JUPYTER_MYSQL_PASSWORD: toor
         JUPYTER_MYSQL_DB: imdb
-        JUPYTER_TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NDM4MzAxNjksImlzcyI6ImtvcGliaW5hIiwibmJmIjoxNjQzODMwMTY5LCJyZXNvdXJjZSI6IjE1NDQ0ZDAwMDAiLCJhdWQiOiJ3ZWJob29rLWFwaSJ9.HJ2HyBFci6hQSeXyPS3t2G7sm5U2uR9A2vJccD25qQg
+        JUPYTER_TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NDM4MzAxNjksImlzcyI6ImtvcGliaW5hIiwibmJmIjoxNjQzODMwMTY5LCJyZXNvdXJjZSI6IjE1NDQ4NzUzMTAiLCJhdWQiOiJ3ZWJob29rLWFwaSJ9.HJ2HyBFci6hQSeXyPS3t2G7sm5U2uR9A2vJccD25qQg
     volumes:
       - ./class:/home/jovyan/
     ports:
@@ -46,6 +46,15 @@ services:
     networks:
       - db_network
 
+  # Apache
+  apache:
+    image: httpd:2.4
+    ports:
+      - "80:80"
+    volumes:
+      - ./html:/usr/local/apache2/htdocs  # Ruta local a tus archivos PHP
+    networks:
+      - db_network
 
 networks:
   db_network:

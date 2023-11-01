@@ -1,0 +1,5 @@
+# Ignorar carpetas en el directorio 'class/'
+class/.ipynb_checkpoints/
+class/.ipython/
+class/.jupyter/
+class/.local/

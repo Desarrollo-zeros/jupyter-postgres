@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            color: #333;
+        }
+        #token {
+            background-color: #f5f5f5;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            word-wrap: break-word;
+        }
+        #copyButton {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #logo {
+            max-width: 100px;
+        }
+        .info {
+            background-color: #f5f5f5;
+            border: 1px solid #ccc;
+            padding: 5px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bienvenido</h1>
+        <p>Copia el siguiente token:</p>
+        <div id="token">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NDM4MzAxNjksImlzcyI6ImtvcGliaW5hIiwibmJmIjoxNjQzODMwMTY5LCJyZXNvdXJjZSI6IjE1NDQ4NzUzMTAiLCJhdWQiOiJ3ZWJob29rLWFwaSJ9.HJ2HyBFci6hQSeXyPS3t2G7sm5U2uR9A2vJccD25qQg</div>
+        <button id="copyButton" onclick="copyToClipboard()">Copiar Token</button>
+        <p>Accede a las siguientes rutas:</p>
+        <ul>
+            <li><a href="http://192.168.0.215:8888/" target="_blank">Jupyter Lab</a></li>
+            <li><a href="http://192.168.0.215:5050/" target="_blank">pgAdmin 4</a></li>
+        </ul>
+        <p>Usuario de pgAdmin 4: admin@admin.com</p>
+        <p>Contraseña de pgAdmin 4: adminpassword</p>
+        <p>Nombre base de datos: <span class="info">Nombre y Apellido</span></p>
+        <p>Nombre base de datos: <span class="info">imdb</span></p>
+        <p>Usuario base de datos: <span class="info">root</span></p>
+        <p>Contraseña base de datos: <span class="info">toor</span></p>
+        <p>Dirección de servidor base de datos: <span class="info">postgres</span></p>
+        <img id="logo" src="https://www.codinter.com/es/wp-content/uploads/sites/3/2018/01/logo-drummond-256x256.png" alt="Logo de Drummond">
+    </div>
+
+    <script>
+        function copyToClipboard() {
+            var token = document.getElementById("token");
+            var textArea = document.createElement("textarea");
+            textArea.value = token.textContent;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            alert("Token copiado al portapapeles.");
+        }
+    </script>
+</body>
+</html>
